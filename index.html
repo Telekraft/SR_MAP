@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stanley Robotics</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/utils.css" />
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+    <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    <script src="js/main.js"></script>
+    <script>
+        (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })();
+    </script>
+    <style>
+      html, body, #map { width:100%; height:100%; margin:0; padding:0; z-index: 1; }
+      #slider{ position: absolute; top: 10px; right: 10px; z-index: 5; }
+    </style>
+  </head>
+  <body>
+<div id='test' style='position:absolute; z-index:999; top:0; left:0; width: 100%; height: 100%; overflow:hidden'>
+    <div id='top'>
+        <a id='logo' href='/'>
+            <img src='img/simple_white.png' />
+            <h2>8 000 spaces <br />4 shuttle bus stops</h2>
+        </a>
+        <a id='nav_toggle_menu' class='toggle_menu' href='javascript:void(0);'>
+            <i class='fa fa-bars fa-2x'></i>
+        </a>
+    </div>
+
+    <div id='menu1' class='menu'>
+        <div class='text-center' style='margin: 20px 0;'>
+            <a class='btn btn-default' href='http://map.stanley-robotics.com/en/'  style='display:inline-block; margin-left:10px; padding:1px 11px 0 11px;  font-size: 22px;'>🇬🇧</a>
+            <input type="button" class='btn btn-default' value="fullscreen" onclick="toggleFullScreen()">
+            <a class="btn btn-default typeform-share link" href="https://stanleyrobotics.typeform.com/to/BILfdC" data-mode="popup" style="padding:4px 11px 4px 11px; color:#333333;text-decoration:underline;font-size:18px;" data-hide-headers=true target="_blank">
+                <i class='fa fa-envelope'></i>
+            </a>
+            <a class='btn btn-default toggle_menu' href='javascript:void(0);' style='padding:0 11px 2px 11px; font-size: 22px'>
+                <i class='fa fa-close'></i>
+            </a>
+        </div>
+        <div id='menu_items' class=''>
+            <a class='target' href='javascript:void(0);' rel='#A1'>
+                Comment ça marche
+            </a>
+            <a class='target' href='javascript:void(0);' rel='#A2'>
+                Densité
+            </a>
+            <a class='target' href='javascript:void(0);' rel='#A3'>
+                Entrée/sortie de parking 
+            </a>
+            <a class='target' href='javascript:void(0);' rel='#A5'>
+                Arrêt navette
+            </a>
+            <a class='target' href='javascript:void(0);' rel='#A6'>
+                Boxes / Bornes 
+            </a>
+            <a class='target' href='javascript:void(0);' rel='#A7'>
+                Robot
+            </a>
+            <a class='target' href='javascript:void(0);' rel='#A8'>
+                Sécurité
+            </a>
+            <a class='target' href='javascript:void(0);' rel='#A9'>
+                OPEX
+            </a>
+            <a class='target' href='javascript:void(0);' rel='#A10'>
+                Emissions CO2
+            </a>
+            <a class='target' href='javascript:void(0);' rel='#A11'>
+                Manoeuvres et emboutissement
+            </a>
+            <a class='target' href='javascript:void(0);' rel='#A12'>
+                Chariots à bagages
+            </a>
+            <a class='target' href='javascript:void(0);' rel='#A13'>
+                CLIENTS & FEEDBACKS
+            </a>
+            <a class='target' href='javascript:void(0);' rel='#A14'>
+                EXTÉRIEUR : NEIGE, INTEMPÉRIES
+            </a>
+            <a class='target' href='javascript:void(0);' rel='#A15'>
+                FLEXIBILITÉ DE DÉPLOIEMENT
+            </a>
+        </div>
+    </div>
+    <div id='menu2' class='menu'>
+        <a class='toggle_menu' href='javascript:void(0);'>
+            <i class='fa fa-close fa-2x'></i>
+        </a>
+    </div>
+
+    <div id="map"></div>
+
+    <div id='container4description'>
+
+        <div id='A1' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>Comment ça marche</h1>
+                        <div class='pilule'></div>
+                        <h3>L’arrivée dans le parking</h3>
+                        <div class='caption'>
+                            Au préalable, le voyageur réserve sa place de stationnement en ligne. Une fois arrivé, un boxe libre l’attend à l’entrée du parking pour y déposer son véhicule. Une fois sa voiture verrouillée, il valide sa réservation sur la borne prévue à cet effet. Il peut ensuite partir prendre son vol, le robot va prendre en charge sa voiture pour aller la garer dans un parking sécurisé. 
+                        </div>
+                        <h3>Le départ du parking</h3>
+                        <div class='caption'>
+                            Lors de la validation de sa réservation, nous avons récupéré les informations du vol retour du voyageur. Notre technologie étant connecté en temps réel aux vols, nous savons exactement quand l’usager va atterrir. Ainsi, le robot prépare quelques minutes avant son arrivée le véhicule et le dépose dans un boxe, prêt à partir.
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                        <iframe width="100%" src="https://www.youtube.com/embed/CZrwd8PcMKA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='A2' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>Densité</h1>
+                        <div class='pilule'></div>
+                        <h3>Densité dans un parking classique</h3>
+                        <div class='caption'>
+                            Dans un parking classique la densité moyenne est de 25m2 par place. L’organisation globale de l’espace est conçue pour permettre aux usagers de se déplacer, de manoeuvrer et d’avoir accès à leur voiture (coffre, portes). 
+                        </div>
+                        <h3>Dans un parking avec Stanley Robotics</h3>
+                        <div class='caption'>
+                            Avec Stanley Robotics, plus besoin d’espace pour les manoeuvres des usagers. Nos robots déplacent et garent les voitures de façon à optimiser au maximum la densité du parking. Ainsi, nous pouvons créer 50% de places en plus. 
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                    <div id="carouselX1" class="carousel slide">
+                      <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselX1" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselX1" data-slide-to="1"></li>
+                            <li data-target="#carouselX1" data-slide-to="2"></li>
+                            <li data-target="#carouselX1" data-slide-to="3"></li>
+                        </ol>
+
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img src="img/description/density_1.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/density_2.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/density_3.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/density_4.jpg">
+                        </div>
+                       </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carouselX1" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carouselX1" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='A3' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>Entrée/sortie de parking </h1>
+                        <div class='pilule'></div>
+                        <h3>Entrée/sortie dans un parking classique</h3>
+                        <div class='caption'>
+                            L’expérience d’entrée et de sortie d’un parking classique est souvent laborieuse pour l’usager. Avant d’être garé, l’automobiliste doit attendre devant une barrière, récupérer son ticket, puis passer du temps à chercher une place disponible. 
+                        </div>
+                        <h3>Dans un parking avec Stanley Robotics</h3>
+                        <div class='caption'>
+                            Avec Stanley Robotics, nous simplifions l’expérience du parking. Plus besoin de barrière, ni de chercher une place. Après avoir réservé en ligne, le client vient garer sa voiture dans un boxe spacieux qui l’attend à l’entrée. A son retour, son véhicule l’attend, prêt à partir. 
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                    <div id="carouselA3" class="carousel slide">
+                      <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselA3" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselA3" data-slide-to="1"></li>
+                            <li data-target="#carouselA3" data-slide-to="2"></li>
+                            <li data-target="#carouselA3" data-slide-to="3"></li>
+                        </ol>
+
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img src="img/description/entree_sortie_1.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/entree_sortie_2.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/entree_sortie_3.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/sortie_x.jpg">
+                        </div>
+                      </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carouselA3" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carouselA3" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='A4' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>Distance maximum de marche</h1>
+                        <div class='pilule'></div>
+                        <h3>Dans un parking classique</h3>
+                        <div class='caption'>
+                            Généralement les parkings longue durée se situent loin des terminaux. Il est courant que l’usager se gare à plusieurs kilomètres de distance, marche plusieurs minutes et prenne une navette pour regagner le terminal. Pour les aéroports, la mise en place de ce système de transport est très coûteuse. 
+
+                        </div>
+                        <h3>Dans un parking avec Stanley Robotics</h3>
+                        <div class='caption'>
+                            Avec Stanley Robotics, nous supprimons la marche à l’intérieur du parking. Grâce aux boxes, l’automobiliste laisse sa voiture à l’entrée et part directement rejoindre le terminal, soit par la navette à proximité immédiate, soit, dans certain cas, directement à pied.
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                    <div id="carouselA4" class="carousel slide">
+                      <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselA4" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselA4" data-slide-to="1"></li>
+                        </ol>
+
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img src="img/description/distance_1.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/distance_2.jpg">
+                        </div>
+                      </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carouselA4" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carouselA4" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='A5' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>Arrêt navette</h1>
+                        <div class='pilule'></div>
+                        <h3>Dans un parking classique</h3>
+                        <div class='caption'>
+                            Afin de permettre aux usagers d’accéder facilement aux terminaux, les aéroports doivent déployer un réseau de navette avec des arrêts éparpillés dans les parkings. Par exemple, dans certains aéroports, il peut facilement y avoir jusqu’à 15 arrêts différents.
+                        </div>
+                        <h3>Dans un parking avec Stanley Robotics</h3>
+                        <div class='caption'>
+                            Avec Stanley Robotics, un seul arrêt suffit pour prendre la navette. Simplifiant ainsi l’accès au terminal, mais réduisant également le temps de trajet des navettes. Ainsi, les voyageurs gagnent du temps pour aller prendre leur vol. Dans certains cas (quand le terminal est à proximité immédiate), nul besoin de navette. 
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                    <div id="carouselX2" class="carousel slide">
+                      <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselX2" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselX2" data-slide-to="1"></li>
+                            <li data-target="#carouselX2" data-slide-to="2"></li>
+                        </ol>
+
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img src="img/description/navette_01.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/navette_02.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/navette.jpg">
+                        </div>
+                      </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carouselX2" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carouselX2" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='A6' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>Boxes / Bornes </h1>
+                        <div class='pilule'></div>
+                        <h3>Des boxes spacieux et lumineux </h3>
+                        <div class='caption'>
+                            A l’entrée du parking, nous avons créé des boxes, dans lesquels les utilisateurs viennent déposer leur voiture. Ces boxes, spacieux et lumineux, ont été conçus pour améliorer l’expérience des usagers et réduire au maximum le temps nécessaire pour prendre leur vol. 
+                        </div>
+                        <h3>Une borne pour simplifier l’expérience</h3>
+                        <div class='caption'>
+                            A côté de chaque boxe se trouve une borne. Cette interface individuelle permet en quelques clics de confirmer sa réservation ainsi que les informations de vol, nous permettant ainsi au retour de voyage de ramener la voiture au bon moment.
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                    <div id="carouselA6" class="carousel slide">
+                      <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselA6" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselA6" data-slide-to="1"></li>
+                            <li data-target="#carouselA6" data-slide-to="2"></li>
+                            <li data-target="#carouselA6" data-slide-to="3"></li>
+                            <li data-target="#carouselA6" data-slide-to="4"></li>
+                            <li data-target="#carouselA6" data-slide-to="5"></li>
+                        </ol>
+
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img src="img/description/cabins_0.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/cabins_1.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/01-boxes.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/02-boxes.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/03-boxes.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/04-boxes.jpg">
+                        </div>
+                      </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carouselA6" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carouselA6" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='A7' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>Robot</h1>
+                        <div class='pilule'></div>
+                        <h3>Optimisation de l’espace en totale autonomie </h3>
+                        <div class='caption'>
+                            Nos robots sont dotés d’une intelligence et de capteurs très précis leur permettant d’optimiser l’espace du parking et de créer jusqu’à 50% de place en plus. De plus, chaque robot est autonome, pas besoin d’action humaine, il prend en charge la voiture de l’usager et va la garer tout seul.  
+                        </div>
+                        <h3>Des robots qui résistent aux intempéries</h3>
+                        <div class='caption'>
+                            Nos robots voituriers sont les seuls au monde capables de fonctionner dans un environnement extérieur. Ils résistent aux intempéries (pluie, neige) et aux variations de températures importantes (-10 / +40°C). 
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                    <div id="carouselA7" class="carousel slide">
+                      <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselA7" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselA7" data-slide-to="1"></li>
+                            <li data-target="#carouselA7" data-slide-to="2"></li>
+                            <li data-target="#carouselA7" data-slide-to="3"></li>
+                            <li data-target="#carouselA7" data-slide-to="4"></li>
+                        </ol>
+
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img src="img/description/robots_0.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/robots_1.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/robots_2.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/robots_3.jpg">
+                        </div>
+                        <div class="item">
+                          <div class="sketchfab-embed-wrapper">
+                            <iframe width="640" height="480" src="https://sketchfab.com/models/c0f7db5947474a7ebb322e113f7b6985/embed" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                            <div>
+                                <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;">
+                                <a href="https://sketchfab.com/models/c0f7db5947474a7ebb322e113f7b6985?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Stanley Robotics - Stan 3D</a>
+                                by <a href="https://sketchfab.com/stanleyrobotics?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">stanleyrobotics</a>
+                                on <a href="https://sketchfab.com?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+                                </p>
+                            </div>
+                        </div>
+                      </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carouselA7" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carouselA7" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='A8' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>Sécurité</h1>
+                        <div class='pilule'></div>
+                        <h3>Dans un parking classique</h3>
+                        <div class='caption'>
+                            Dans un parking classique, il n’est pas possible de contrôler les allées et venues. Ainsi, votre voiture n’est pas à l’abri d’effractions ou de vol. Pour contrer cela, les aéroports doivent mettre en place des systèmes de sécurité vidéo et du personnel. 
+                        </div>
+                        <h3>Dans un parking avec Stanley Robotics</h3>
+                        <div class='caption'>
+                            Avec Stanley Robotics, l’enceinte du parking est totalement fermée, seul les robots peuvent y circuler. De ce fait, les véhicules sont en sécurité. Plus d’infraction, plus d’intrusion, ni système de surveillance complexe pour veiller sur le parking.
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                        <img src='img/description/securite.jpg' />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='A9' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>Opex</h1>
+                        <div class='pilule'></div>
+                        <h3>Dans un parking classique</h3>
+                        <div class='caption'>
+                            Dans un parking classique il y a de nombreuses charges d’exploitation pour maintenir la qualité du service : marquage au sol pour indiquer les places des voitures et guider les usagers ; éclairages pour se repérer la nuit ; nettoyage de l’espace pour maintenir un niveau de propreté élevé; patrouilles de sécurité, etc…
+                        </div>
+                        <h3>Dans un parking avec Stanley Robotics</h3>
+                        <div class='caption'>
+                            Avec Stanley Robotics, les coûts d’exploitation du parking sont drastiquement réduits. Le parking n’étant plus accessible pour les usagers, plus besoin de marquage au sol, d’éclairage, ni de nettoyage. Les robots n’en ont pas besoin. 
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                    <div id="carouselA9" class="carousel slide">
+                      <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselA9" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselA9" data-slide-to="1"></li>
+                            <li data-target="#carouselA9" data-slide-to="2"></li>
+                        </ol>
+
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img src="img/description/opex_1.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/opex_2.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/opex_3.jpg">
+                        </div>
+                      </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carouselA9" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carouselA9" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='A10' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>Emissions CO2 </h1>
+                        <div class='pilule'></div>
+                        <h3>Dans un parking classique</h3>
+                        <div class='caption'>
+                            Dans un parking classique, les voitures roulent, s’arrêtent, accélèrent : elles émettent ainsi du CO2. Les aéroports surveillent leur impact carbone, pour beaucoup c’est une des priorités des prochaines années que de faire baisser leur indice d’émissions de CO2.
+                        </div>
+                        <h3>Dans un parking avec Stanley Robotics</h3>
+                        <div class='caption'>
+                            Avec Stanley Robotics, les voitures ne circulent plus. Le moteur des voitures est éteint en permanence. Ce sont nos robots qui déplacent et garent les voitures et eux sont totalement électriques. 
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                        <img src='img/description/co2.jpg' />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='A11' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>Manoeuvres et emboutissement des voitures </h1>
+                        <div class='pilule'></div>
+                        <h3>Dans un parking classique</h3>
+                        <div class='caption'>
+                            Les usagers des parkings classiques sont souvent confrontés à des manoeuvres périlleuses. Il est fréquent que des accrochages se produisent au moment de se garer. C’est un motif courant d’énervement pour les usagers de parking que de retrouver leur voiture emboutie. 
+                        </div>
+                        <h3>Dans un parking avec Stanley Robotics</h3>
+                        <div class='caption'>
+                            Avec Stanley Robotics, les usagers n’ont plus de manoeuvres à faire. Les boxes sont suffisamment larges pour rendre facile le dépôt. Ensuite, nos robots se chargent de tout : ils sont équipés de nombreux capteurs permettant d’assurer des manoeuvres, même complexes, sans accros. 
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                    <div id="carouselA11" class="carousel slide">
+                      <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselA11" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselA11" data-slide-to="1"></li>
+                            <li data-target="#carouselA11" data-slide-to="2"></li>
+                        </ol>
+
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img src="img/description/man1.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/man2.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/man3.jpg">
+                        </div>
+                      </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carouselA11" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carouselA11" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='A12' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>Chariots à bagages </h1>
+                        <div class='pilule'></div>
+                        <h3>Dans un parking classique</h3>
+                        <div class='caption'>
+                            Pour faciliter le transport des bagages, dans un parking classique, de nombreux chariots à bagages sont déployés à plusieurs endroits. Pour l’usager, il est compliqué de savoir où ils se trouvent et c’est souvent une perte de temps. Pour l’aéroport, il faut à longueur de journée réapprovisionner les chariots et ranger ceux laissés en plein milieu des allées.
+                        </div>
+                        <h3>Dans un parking avec Stanley Robotics</h3>
+                        <div class='caption'>
+                            Avec Stanley Robotics, nous centralisons les chariots devant les boxes. Ainsi, à côté de la zone de dépôt, le voyageur a facilement accès à un chariot pour porter ses bagages. Ce regroupement simplifie également la gestion pour les aéroports : un seul point de réapprovisionnement et plus de chariots au sein même du parking. 
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                    <div id="carouselA12" class="carousel slide">
+                      <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselA12" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselA12" data-slide-to="1"></li>
+                        </ol>
+
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img src="img/description/chariot_1.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/chariot_2.jpg">
+                        </div>
+                      </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carouselA12" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carouselA12" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='A13' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>CLIENTS & FEEDBACKS</h1>
+                        <div class='pilule'></div>
+                        <div class='caption' style='margin-top:15px;'>
+                            Depuis l’ouverture du service au public, notre équipe d’UX designers a pris le temps d’analyser les comportements et les retours des clients du service pour mieux connaître leurs sentiments et leurs motivations. Par exemple, les clients - après avoir utilisé le service - le qualifient de “simple” (27%), “efficace” (19%) ou encore “rapide” (17%). 
+                        </div>
+                        <div class='caption' style='margin-top:15px;'>
+                            Cette étude nous permet aussi d’ajuster les prix du service. Aujourd’hui, <strong>près de 50% des personnes interrogées après avoir utilisé le service, sont prêtes à payer jusqu’à 10€</strong> supplémentaires comparé au parking classique. Pour le moment le service est acheté par les utilisateurs environ 10% plus cher que le parking longue durée normal.
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                    <div id="carouselA13" class="carousel slide">
+                      <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselA13" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselA13" data-slide-to="1"></li>
+                            <li data-target="#carouselA13" data-slide-to="2"></li>
+                            <li data-target="#carouselA13" data-slide-to="3"></li>
+                        </ol>
+
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img src="img/description/interview_1.png">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/interview_2.png">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/interview_3.png">
+                        </div>
+                        <div class="item">
+                          <iframe width="560" height="315" src="https://www.youtube.com/embed/8BfcRevjm10" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                      </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carouselA13" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carouselA13" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='A14' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>EXTÉRIEUR : NEIGE, INTEMPÉRIES</h1>
+                        <div class='pilule'></div>
+                        <div class='caption' style='margin-top:15px;'>
+                            Afin d’assurer un service extérieur tout au long de l’année et en tout temps, nous avons mené des tests en simulant des conditions extrêmes. Ici par exemple, durant deux jours nous avons fait tourner le service sous la neige pour voir comment le robot se comportait. Vous pouvez voir ci-contre le robot en fonctionnement avec 5 cm de neige. 
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                    <div id="carouselA14" class="carousel slide">
+                      <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselA14" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselA14" data-slide-to="1"></li>
+                            <li data-target="#carouselA14" data-slide-to="2"></li>
+                            <li data-target="#carouselA14" data-slide-to="3"></li>
+                        </ol>
+
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img src="img/description/Snow-01.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/Snow-02.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/Snow-03.jpg">
+                        </div>
+                        <div class="item">
+                          <iframe width="100%" src="https://www.youtube.com/embed/X8hZrPS0Ihw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                      </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carouselA14" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carouselA14" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id='A15' class='container description_zone'>
+            <div class='close_'>
+                <a href='javascript:void(0);'><i class='fa fa-close'></i></a>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='text_'>
+                        <h1>FLEXIBILITÉ DE DÉPLOIEMENT D’UN PROJET</h1>
+                        <div class='pilule'></div>
+                        <div class='caption' style='margin-top:15px;'>
+                            Notre technologie se déploie facilement sur votre parking et offre une grande flexibilité afin de s’adapter à la croissance de votre trafic passagers. Un fois la zone de parking définie et sécurisée par une clôture, il ne reste qu’à y installer les boxes et les robots, et c’est prêt ! En fonction de vos besoins, nous pouvons ainsi créer des places supplémentaires permettant d’optimiser vos coûts. A l’inverse, si dans le futur le trafic passagers venant en voiture diminue, vous pourrez grâce aux robots diminuer davantage la taille de votre parking, libérant ainsi du foncier pour un usage alternatif (“AirportCity”, Hôtel, Golf, ..).
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                    <div class='illustration'>
+                    <div id="carouselA15" class="carousel slide">
+                      <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselA15" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselA15" data-slide-to="1"></li>
+                            <li data-target="#carouselA15" data-slide-to="2"></li>
+                            <li data-target="#carouselA15" data-slide-to="3"></li>
+                        </ol>
+
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img src="img/description/parking-01.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/parking-02.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/parking-03.jpg">
+                        </div>
+                        <div class="item">
+                          <img src="img/description/parking-04.jpg">
+                        </div>
+                      </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carouselA15" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carouselA15" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="typeform-widget" data-url="https://stanleyrobotics.typeform.com/to/BILfdC" data-hide-headers=true data-hide-footer=true style="width: 100%; height: 100%;"></div>
+
+    <div id='bottom'>
+        <a id='map_toggle' href='javascript:void(0);'>
+            <input type="checkbox" data-toggle="toggle"  data-on="Stanley Robotics" data-off="Classic Car Park">
+        </a>
+    </div>
+</div>
+  </body>
+  <script> 
+    (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })();
+  </script>
+</html>

@@ -1,0 +1,62 @@
+
+.leaflet-container{
+    background: #FFFFFF;
+}
+.leaflet-popup-content{
+    width: auto;
+    margin: 3px 6px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.leaflet-popup-content-wrapper{
+    border-radius: 5px;
+    background-color: rgba(0,0,0,.66);
+    color: white;
+}.leaflet-popup-content-wrapper a{
+    color: white;
+    text-decoration: none;
+}.leaflet-popup-content-wrapper a:hover,.leaflet-popup-content-wrapper a:active, .leaflet-popup-content-wrapper a:visited{
+    color: white;
+}
+.leaflet-popup-tip-container{
+    opacity: 0;
+}
+.leaflet-top{
+    top: 45%;
+    /*bottom: 100px;*/
+}
+.leaflet-bar a{
+    background-color: rgb(92,190,222);
+    border-color: transparent;
+    color: white;
+}.leaflet-bar a:hover{
+    background-color: rgb(92,190,222);
+    border-color: transparent;
+    color: black;
+}
+.leaflet-popup-close-button{
+    /*display: none;*/
+}
+
+
+
+
+.btn-primary{
+    background-color: rgb(92,190,222);
+    border-color: rgb(82,185,210);
+}
+.btn-primary:hover, .btn-primary:active,
+.btn-primary:focus,
+.btn-primary:active:focus{
+    background-color: rgb(82,185,210);
+    border-color: rgb(75,175,197);
+}
+
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img{
+    max-width: 99999px;
+}
+
+.carousel-control.right, .carousel-control.left{
+    background-image: none;
+}
